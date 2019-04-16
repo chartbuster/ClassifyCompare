@@ -1,0 +1,33 @@
+---
+title: "classificationComparision"
+author: "Hari"
+date: "April 16, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("readr")
+library("MASS")
+
+```
+
+```{r}
+#LOADING DATA
+cancer = read_csv("D:/projects/cc/cancer.csv")
+View(cancer)
+summary(cancer)
+head(cancer)
+
+```
+```{r}
+
+# Cleaning the dataset. Removing the patient ID
+cancer = cancer[, -1]
+View(cancer)
+head(cancer)
+
+```
