@@ -121,3 +121,9 @@ Results
 
 ```
 ```{r}
+
+## Testing Logistic Regression Model on test data
+TestingLG <- predict(LogReg, testset)
+TestingLG
+
+```
