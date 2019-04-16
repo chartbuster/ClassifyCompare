@@ -31,3 +31,9 @@ View(cancer)
 head(cancer)
 
 ```
+```{r}
+
+# Split dataset into train set, validation set and test set
+
+splitdata <- sample(1:2, size = nrow(cancer), prob = c(0.7, 0.3), replace = T)
+```
