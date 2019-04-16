@@ -81,5 +81,18 @@ LogReg <- train(diagnosis ~ ., data = traindata, method = "glm", family = binomi
 ```{r}
 # Logistic Regression
 LRPred <- predict(LogReg, validset)
-
 ```
+```{r}
+# Making `data` and `reference` to be factors with the same levels.
+validset$diagnosis <- as.factor(validset$diagnosis)
+levels(validset$diagnosis) <- levels(NavPred)
+length(NavPred) <- length(validset$diagnosis)
+ConmaxNB <- confusionMatrix(validset$diagnosis, NavPred)
+
+# Confusion Matrix for Logisitic Regression
+length(LRPred) <- length(validset$diagnosis)
+ConmaxLG <- confusionMatrix(validset$diagnosis, LRPred)
+
+ModelType <- c( "Naive Bayes", "Logistic regression")  
+```
+```{r}
