@@ -37,3 +37,11 @@ head(cancer)
 
 splitdata <- sample(1:2, size = nrow(cancer), prob = c(0.7, 0.3), replace = T)
 ```
+```{r}
+# training set
+traindata <- cancer[splitdata == 1, ]
+
+intrain <- sample(1:2, size = nrow(traindata), prob = c(0.7, 0.3), replace = T)
+
+traindata <- traindata[intrain == 1, ]
+```
