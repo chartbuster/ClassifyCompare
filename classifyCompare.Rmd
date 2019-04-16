@@ -65,3 +65,14 @@ set.seed(1000)
 # Training Naivebayes Classification Model
 NavB <- train(diagnosis ~ ., data = traindata, method = "nb", trControl = tcontrol)
 ```
+
+```{r}
+
+# Predicting Naivebayes Classification Model
+NavPred <- predict(NavB, validset)
+NavPred
+
+```
+```{r}
+
+```
