@@ -57,8 +57,11 @@ validset <- traindata[intrain == 2, ]
 testset <- cancer[splitdata == 2, ] 
 ```
 ```{r}
-
 # Applying 10 fold Cross- validation
 tcontrol <- trainControl(method = "cv", number = 10)
 set.seed(1000)
+```
+```{r}
+# Training Naivebayes Classification Model
+NavB <- train(diagnosis ~ ., data = traindata, method = "nb", trControl = tcontrol)
 ```
