@@ -45,3 +45,7 @@ intrain <- sample(1:2, size = nrow(traindata), prob = c(0.7, 0.3), replace = T)
 
 traindata <- traindata[intrain == 1, ]
 ```
+```{r}
+# validation set
+validset <- traindata[intrain == 2, ]
+```
