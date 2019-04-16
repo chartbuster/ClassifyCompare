@@ -97,3 +97,24 @@ ConmaxLG <- confusionMatrix(validset$diagnosis, LRPred)
 ModelType <- c( "Naive Bayes", "Logistic regression")  
 ```
 ```{r}
+
+# Training classification accuracy
+TrainAccuracy <- c(max(NavB$results$Accuracy), 
+                    max(LogReg$results$Accuracy))
+
+# Training misclassification error
+Train_missclass_Error <- 1 - TrainAccuracy
+
+# validation classification accuracy
+ValidationAccuracy <- c( ConmaxNB$overall[1], 
+                         ConmaxLG$overall[1])
+
+# Validation misclassification error or out-of-sample-error
+Validation_missclass_Error <- 1 - ValidationAccuracy
+
+
+```
+```{r}
+
+```
+```{r}
