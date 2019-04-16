@@ -88,7 +88,8 @@ validset$diagnosis <- as.factor(validset$diagnosis)
 levels(validset$diagnosis) <- levels(NavPred)
 length(NavPred) <- length(validset$diagnosis)
 ConmaxNB <- confusionMatrix(validset$diagnosis, NavPred)
-
+```
+```{r}
 # Confusion Matrix for Logisitic Regression
 length(LRPred) <- length(validset$diagnosis)
 ConmaxLG <- confusionMatrix(validset$diagnosis, LRPred)
