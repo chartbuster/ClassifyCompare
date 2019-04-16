@@ -75,4 +75,11 @@ NavPred
 ```
 ```{r}
 
+# Logisitic Regression
+LogReg <- train(diagnosis ~ ., data = traindata, method = "glm", family = binomial,trControl = tcontrol)
+```
+```{r}
+# Logistic Regression
+LRPred <- predict(LogReg, validset)
+
 ```
