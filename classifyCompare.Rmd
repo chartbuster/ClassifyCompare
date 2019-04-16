@@ -11,7 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library("readr")
+library("klaR")
 library("MASS")
+library("randomForest")
+library("caret")
 
 ```
 
@@ -48,4 +51,14 @@ traindata <- traindata[intrain == 1, ]
 ```{r}
 # validation set
 validset <- traindata[intrain == 2, ]
+```
+```{r}
+# test set
+testset <- cancer[splitdata == 2, ] 
+```
+```{r}
+
+# Applying 10 fold Cross- validation
+tcontrol <- trainControl(method = "cv", number = 10)
+set.seed(1000)
 ```
