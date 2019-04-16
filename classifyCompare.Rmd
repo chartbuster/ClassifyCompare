@@ -115,6 +115,9 @@ Validation_missclass_Error <- 1 - ValidationAccuracy
 
 ```
 ```{r}
+Results <- data.frame(ModelType, TrainAccuracy, Train_missclass_Error, ValidationAccuracy, 
+                      Validation_missclass_Error)
+Results
 
 ```
 ```{r}
