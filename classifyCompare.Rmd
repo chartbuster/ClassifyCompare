@@ -106,18 +106,21 @@ LogReg <- train(diagnosis ~ ., data = traindata, method = "glm", family = binomi
 
 ##### Predicting
 
-We have our models read. We use our validation data sample with  both these 
+We have our models read. We use our validation data sample with both these models to make predictions.
 ```{r}
 # Predicting Naivebayes Classification Model
 NavPred <- predict(NavB, validset)
 NavPred
 
-```
-```{r}
 # Logistic Regression
 LRPred <- predict(LogReg, validset)
 LRPred
 ```
+
+##### Confusion Matrix
+
+A confusion matrix is a table that is often used to describe the performance of a classification model on a set of test data for which the true values are known. I found [this article](https://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/) best to understand the terminology of the confusion matrix.
+
 ```{r}
 # Making `data` and `reference` to be factors with the same levels.
 validset$diagnosis <- as.factor(validset$diagnosis)
@@ -130,9 +133,6 @@ length(LRPred) <- length(validset$diagnosis)
 ConmaxLG <- confusionMatrix(validset$diagnosis, LRPred)
 
 ModelType <- c( "Naive Bayes", "Logistic regression")  
-```
-
-```{r}
 
 # Training classification accuracy
 TrainAccuracy <- c(max(NavB$results$Accuracy), 
