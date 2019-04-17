@@ -150,16 +150,28 @@ Validation_missclass_Error <- 1 - ValidationAccuracy
 
 
 ```
+
+##### Results
+
+Which classifation model predicted the data more accurately?
+
 ```{r}
-Results <- data.frame(ModelType, TrainAccuracy, Train_missclass_Error, ValidationAccuracy, 
-                      Validation_missclass_Error)
+Results <- data.frame(ModelType, TrainAccuracy, Train_missclass_Error, ValidationAccuracy, Validation_missclass_Error)
 Results
 
 ```
+**Linear Regression** model has better accuracy over the Naive Bayes model
+
+##### Testing
+
+Testing the Logistic regression model on the test data sample.
+
 ```{r}
 
 ## Testing Logistic Regression Model on test data
 TestingLG <- predict(LogReg, testset)
 TestingLG
-
 ```
+
+##### Conclusion
+It is important to choose the right machine learning model to make predictions. Many factors, like the size of the samples, number of variables etc., affect the accuracy of the model. Classification comparision helps in choosing the best model to adapt over your data.
