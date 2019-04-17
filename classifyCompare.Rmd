@@ -1,5 +1,5 @@
 ---
-title: "classificationComparision"
+title: "Classification Comparision"
 author: "Hari"
 date: "April 16, 2019"
 output: html_document
@@ -8,7 +8,6 @@ output: html_document
 
 In machine learning and statistics, classification is a supervised learning approach in which the computer program learns from the data input given to it and then uses this learning to classify new observation.  
 There are many classification algorithms in Machine Learning:
-
     +Linear Classifiers: Logistic Regression, Naive Bayes Classifier
     +Support Vector Machines
     +Decision Trees
@@ -28,7 +27,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 First things first. Initiate all the libraries.If you dont have theem installed already, install them using the `install.packages` command. You might face issues when you try installing multiple libraries in a single line of command. If thats the case try installing the libraries one after the other.
 
-```{r}
+```
 library("readr")
 library("klaR")
 library("MASS")
@@ -41,7 +40,7 @@ library("caret")
 
 Here we are using the Wisconsin Breast Cancer dataset from Kaggle. [Click Here](https://www.kaggle.com/uciml/breast-cancer-wisconsin-data) to visit the download page.  
 
-```{r}
+```
 cancer = read_csv("D:/projects/cc/cancer.csv")
 View(cancer)
 summary(cancer)
@@ -52,7 +51,7 @@ head(cancer)
 ##### Cleaning the Data
 
 Most part of the dataset is clean. We just need to remove the "Patienst ID" as it is of no value to this classification.
-```{r}
+```
 cancer = cancer[, -1]
 View(cancer)
 head(cancer)
@@ -63,11 +62,11 @@ head(cancer)
 
 We are now going to split the data into train set, validation set and test set.
 
-```{r}
+```
 
 splitdata <- sample(1:2, size = nrow(cancer), prob = c(0.7, 0.3), replace = T)
 ```
-```{r}
+```
 # training set
 traindata <- cancer[splitdata == 1, ]
 
@@ -85,7 +84,7 @@ testset <- cancer[splitdata == 2, ]
 ##### Cross Validation
 
 Defining training control function to evaluate the classification accuracy. We are using 10 - fold cross validation method to do so. 
-```{r}
+```
 # Applying 10 fold Cross- validation
 tcontrol <- trainControl(method = "cv", number = 10)
 set.seed(1000)
@@ -95,7 +94,7 @@ set.seed(1000)
 
 Now that we have our data samples and the test control defined, we have to train our models on these data samples.
 
-```{r}
+```
 # Training Naivebayes Classification Model
 NavB <- train(diagnosis ~ ., data = traindata, method = "nb", trControl = tcontrol)
 
@@ -107,7 +106,7 @@ LogReg <- train(diagnosis ~ ., data = traindata, method = "glm", family = binomi
 ##### Predicting
 
 We have our models read. We use our validation data sample with both these models to make predictions.
-```{r}
+```
 # Predicting Naivebayes Classification Model
 NavPred <- predict(NavB, validset)
 NavPred
@@ -121,7 +120,7 @@ LRPred
 
 A confusion matrix is a table that is often used to describe the performance of a classification model on a set of test data for which the true values are known. I found [this article](https://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/) best to understand the terminology of the confusion matrix.
 
-```{r}
+```
 # Making `data` and `reference` to be factors with the same levels.
 validset$diagnosis <- as.factor(validset$diagnosis)
 levels(validset$diagnosis) <- levels(NavPred)
@@ -155,7 +154,7 @@ Validation_missclass_Error <- 1 - ValidationAccuracy
 
 Which classifation model predicted the data more accurately?
 
-```{r}
+```
 Results <- data.frame(ModelType, TrainAccuracy, Train_missclass_Error, ValidationAccuracy, Validation_missclass_Error)
 Results
 
@@ -166,8 +165,7 @@ Results
 
 Testing the Logistic regression model on the test data sample.
 
-```{r}
-
+```
 ## Testing Logistic Regression Model on test data
 TestingLG <- predict(LogReg, testset)
 TestingLG
