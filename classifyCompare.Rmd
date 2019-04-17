@@ -4,10 +4,29 @@ author: "Hari"
 date: "April 16, 2019"
 output: html_document
 ---
+#### Comparing Classification Algorithms
+
+In machine learning and statistics, classification is a supervised learning approach in which the computer program learns from the data input given to it and then uses this learning to classify new observation.  
+There are many classification algorithms in Machine Learning:
+
+    +Linear Classifiers: Logistic Regression, Naive Bayes Classifier
+    +Support Vector Machines
+    +Decision Trees
+    +Boosted Trees
+    +Random Forest
+    +Neural Networks
+    +Nearest Neighbor
+
+In this project we will be comparing two linear classifiers, *Logistic Regression* and *Naive Bayes Classifier* to compare their claasification accuracies by using 10 - fold cross validation method.
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+##### Initiate/Install the libraries  
+
+First things first. Initiate all the libraries.If you dont have theem installed already, install them using the `install.packages` command. You might face issues when you try installing multiple libraries in a single line of command. If thats the case try installing the libraries one after the other.
 
 ```{r}
 library("readr")
@@ -18,25 +37,33 @@ library("caret")
 
 ```
 
+##### Loading and Summarizing Data
+
+Here we are using the Wisconsin Breast Cancer dataset from Kaggle. [Click Here](https://www.kaggle.com/uciml/breast-cancer-wisconsin-data) to visit the download page.  
+
 ```{r}
-#LOADING DATA
 cancer = read_csv("D:/projects/cc/cancer.csv")
 View(cancer)
 summary(cancer)
 head(cancer)
 
 ```
-```{r}
 
-# Cleaning the dataset. Removing the patient ID
+##### Cleaning the Data
+
+Most part of the dataset is clean. We just need to remove the "Patienst ID" as it is of no value to this classification.
+```{r}
 cancer = cancer[, -1]
 View(cancer)
 head(cancer)
 
 ```
-```{r}
 
-# Split dataset into train set, validation set and test set
+##### Data Sampling 
+
+We are now going to split the data into train set, validation set and test set.
+
+```{r}
 
 splitdata <- sample(1:2, size = nrow(cancer), prob = c(0.7, 0.3), replace = T)
 ```
@@ -47,36 +74,41 @@ traindata <- cancer[splitdata == 1, ]
 intrain <- sample(1:2, size = nrow(traindata), prob = c(0.7, 0.3), replace = T)
 
 traindata <- traindata[intrain == 1, ]
-```
-```{r}
+
 # validation set
 validset <- traindata[intrain == 2, ]
-```
-```{r}
+
 # test set
 testset <- cancer[splitdata == 2, ] 
 ```
+
+##### Cross Validation
+
+Defining training control function to evaluate the classification accuracy. We are using 10 - fold cross validation method to do so. 
 ```{r}
 # Applying 10 fold Cross- validation
 tcontrol <- trainControl(method = "cv", number = 10)
 set.seed(1000)
 ```
+
+##### Model Training
+
+Now that we have our data samples and the test control defined, we have to train our models on these data samples.
+
 ```{r}
 # Training Naivebayes Classification Model
 NavB <- train(diagnosis ~ ., data = traindata, method = "nb", trControl = tcontrol)
+
+# Logisitic Regression
+LogReg <- train(diagnosis ~ ., data = traindata, method = "glm", family = binomial,trControl = tcontrol)
+
+
 ```
-
 ```{r}
-
 # Predicting Naivebayes Classification Model
 NavPred <- predict(NavB, validset)
 NavPred
 
-```
-```{r}
-
-# Logisitic Regression
-LogReg <- train(diagnosis ~ ., data = traindata, method = "glm", family = binomial,trControl = tcontrol)
 ```
 ```{r}
 # Logistic Regression
