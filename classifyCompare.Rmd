@@ -102,8 +102,11 @@ NavB <- train(diagnosis ~ ., data = traindata, method = "nb", trControl = tcontr
 # Logisitic Regression
 LogReg <- train(diagnosis ~ ., data = traindata, method = "glm", family = binomial,trControl = tcontrol)
 
-
 ```
+
+##### Predicting
+
+We have our models read. We use our validation data sample with  both these 
 ```{r}
 # Predicting Naivebayes Classification Model
 NavPred <- predict(NavB, validset)
@@ -121,14 +124,14 @@ validset$diagnosis <- as.factor(validset$diagnosis)
 levels(validset$diagnosis) <- levels(NavPred)
 length(NavPred) <- length(validset$diagnosis)
 ConmaxNB <- confusionMatrix(validset$diagnosis, NavPred)
-```
-```{r}
+
 # Confusion Matrix for Logisitic Regression
 length(LRPred) <- length(validset$diagnosis)
 ConmaxLG <- confusionMatrix(validset$diagnosis, LRPred)
 
 ModelType <- c( "Naive Bayes", "Logistic regression")  
 ```
+
 ```{r}
 
 # Training classification accuracy
