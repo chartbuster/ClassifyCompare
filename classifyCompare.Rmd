@@ -7,14 +7,16 @@ output: html_document
 #### Comparing Classification Algorithms
 
 In machine learning and statistics, classification is a supervised learning approach in which the computer program learns from the data input given to it and then uses this learning to classify new observation.  
+
 There are many classification algorithms in Machine Learning:
-    +Linear Classifiers: Logistic Regression, Naive Bayes Classifier
-    +Support Vector Machines
-    +Decision Trees
-    +Boosted Trees
-    +Random Forest
-    +Neural Networks
-    +Nearest Neighbor
+
+  * Linear Classifiers -Logistic Regression, Naive Bayes Classifier
+  * Support Vector Machines
+  + Decision Trees
+  + Boosted Trees
+  + Random Forest
+  + Neural Networks
+  + Nearest Neighbor
 
 In this project we will be comparing two linear classifiers, *Logistic Regression* and *Naive Bayes Classifier* to compare their claasification accuracies by using 10 - fold cross validation method.
 
@@ -50,7 +52,7 @@ head(cancer)
 
 ##### Cleaning the Data
 
-Most part of the dataset is clean. We just need to remove the "Patienst ID" as it is of no value to this classification.
+Most part of the dataset is clean. We just need to remove the "Patient ID" as it is of no value to this classification.
 ```
 cancer = cancer[, -1]
 View(cancer)
